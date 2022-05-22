@@ -1,0 +1,50 @@
+[
+    {
+      "name": "Flooring & Tiling Hammer",
+      "img": "https://m.media-amazon.com/images/I/51F3OG6kpmL._AC_SX425_.jpg",
+      "description": "This nylon-vinyl shock reduction grip rip hammer is perfect for driving and removing nails. Fully polished forged one-piece solid steel construction eliminates loose heads while the nylon vinyl deep cushion grips bonded to steel handle for comfort and durability. Since 1923, the Estwing family and its employees have taken pride in designing and manufacturing the world's most durable, comfortable and attractive striking and struck tools. All claw hammers, axes, specialty tools and pry bars are manufactured to the highest possible standards and offer a true value to both tradesmen and craftsmen alike.",
+      "minimum_order_quantity": 300,
+      "available_quantity": 2000,
+      "unit_price": 30
+    },
+    {
+      "name": "CRAFTSMAN Ratcheting Screwdriver",
+      "img": "https://m.media-amazon.com/images/I/71jMXYb+p1L._AC_SX425_.jpg",
+      "description": "The 26-piece Multi-Bits Ratcheting Screwdriver has an ergonomic handle offering twisting force for three different applications, a speed zone for quick rotation, a torque zone for added grip in heavy-torque applications, and a precision tactile zone for tasks requiring more rotation control. A chrome-plated bar of the CRAFTSMAN screwdriver set resists corrosion.",
+      "minimum_order_quantity": 400,
+      "available_quantity": 3000,
+      "unit_price": 20
+    },
+    {
+      "name": "IRWIN VISE-GRIP Pliers Set",
+      "img": "https://m.media-amazon.com/images/I/81Jsl6CRXmL._AC_SY450_.jpg",
+      "description": "Constructed from durable nickel chromium steel. Machined jaws for maximum gripping strength. Anti-pinch, non-slip ProTouch Grips provide comfort, control, and less hand fatigue. Includes 6-inch diagonal and slip-joint, 8-inch long nose, and 10-inch groove joint pliers. Tool Wrap rolls small to store easily. Variable-size jaws on slip-joint pliers are a flexible solution for most household needs. Long-nose pliers reach into confined areas. IRWIN Tools VISE-GRIP Pliers Set, 4-Piece Traditional (2078707)",
+      "minimum_order_quantity": 400,
+      "available_quantity": 4000,
+      "unit_price": 45
+    },
+    {
+      "name": "WORKPRO 3-piece Adjustable Wrench",
+      "img": "https://m.media-amazon.com/images/I/61avwQav41L._AC_SX425_.jpg",
+      "description": "Affordable Dependability, Reinvented.Our sole focus is to build high quality tools at an incredible value.We are in business to bring affordable dependability to the world of tools.Forged chrome vanadium steel provides high strength and durabilityChrome plated surface for rust resistance.Slip-resistant bi-material handle for a comfortable grip.Hanging hole for easy storage",
+      "minimum_order_quantity": 200,
+      "available_quantity": 3000,
+      "unit_price": 30
+    },
+    {
+      "name": "BLACK+DECKER Electric Hand Saw",
+      "img": "https://m.media-amazon.com/images/I/510maK7w3sS._AC_SX425_.jpg",
+      "description": "Power through your most difficult straight cuts with the BLACK+DECKER 3.4 Amp Powered Handsaw. Lightweight and compact, it’s perfect for indoor and outdoor use, cutting through tree limbs, branches, plant shrubbery, wood, wood composites, plastic, non-ferrous metals and more. The on-board safety button keeps the device idle until you’re ready to pull the trigger. Maintenance is simple and easy with tool-free blade changing. And the handy storage bag easily stores the saw, blades, cord and more for your house and garden. It has Key less Blade Clamp.",
+      "minimum_order_quantity": 100,
+      "available_quantity": 5000,
+      "unit_price": 50
+    },
+    {
+      "name": "Cold Steel All-Purpose Axe",
+      "img": "https://m.media-amazon.com/images/I/71wZXGcyZQL._AC_SX569_.jpg",
+      "description": "Cold Steel is a knife and tool company dedicated to creating strong, sharp knives, swords, tomahawks, machetes, cutlery, tools for every day carry: EDC. Quickly adopted by Military, Law Enforcement Special units, Emergency Services Personnel, Self Defense professionals as well as members of the Martial Arts community, Cold Steel quickly became renowned for quality, strength, reliability and dependability in every day carry (EDC). Our diverse and varied line-up quickly grew to include not only a massive selection of folding knives (from smaller  blades, to our iconic giant “mega-folders”) but fixed blades, swords, sabers, pole-arms and halberds, as well as hunting gear, spears, blowguns, axes, machetes, tomahawks and tools!",
+      "minimum_order_quantity": 300,
+      "available_quantity": 5000,
+      "unit_price": 60
+    }
+  ]
