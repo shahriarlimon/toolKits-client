@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({children}) => {
     return (
         <div class="drawer drawer-end">
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
@@ -29,7 +29,7 @@ const Navbar = () => {
             </div>
           </div>
          {/*  <!-- Page content here --> */}
-          Content
+         {children}
         </div> 
         <div class="drawer-side">
           <label for="my-drawer-3" class="drawer-overlay"></label> 
