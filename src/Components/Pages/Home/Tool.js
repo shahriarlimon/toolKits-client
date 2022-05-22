@@ -9,10 +9,10 @@ const Tool = ({tool}) => {
           <h2 class="card-title">{name}</h2>
           <p>Available Quantity: {available_quantity}</p>
           <p>Minumum Order Quantity: {minimum_order_quantity}</p>
-          <p>Unit Price: {unit_price}</p>
+          <p>Unit Price: ${unit_price}</p>
           <p>{description.slice(0,200)+ '...'}</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
+            <button class="btn btn-primary">Order Now</button>
           </div>
         </div>
       </div>
