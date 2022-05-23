@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/FirebaseConfig.init";
 import {
+  useAuthState,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
@@ -14,6 +15,7 @@ const Login = () => {
 
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
+    const [user] = useAuthState(auth)
   const {
     register,
     handleSubmit,
@@ -22,8 +24,22 @@ const Login = () => {
     reset,
   } = useForm();
   const navigate = useNavigate();
-  if (signInUser || googleUser) {
-    navigate("/");
+  if (user) {
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      body: JSON.stringify({email:user.email}),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if(data.token){
+          localStorage.setItem('access_token',data.token);
+          navigate("/"); 
+        }
+      });
+   
   }
   if (signInLoading || googleLoading) {
     <Loading />;

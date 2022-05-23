@@ -29,6 +29,7 @@ const Navbar = ({children}) => {
                 <li><NavLink to="/dashboard">Dashboard</NavLink></li>
                 <li><NavLink to="/about">About</NavLink></li>
                 <li><NavLink to="/blogs">Blogs</NavLink></li>
+               { user && <button className='btn btn-ghost'>{user.displayName}</button>}
                 {user?<button onClick={()=>handleSignOut()} className='btn btn-ghost'>Logout</button>:<li><NavLink to="/login">Login</NavLink></li>}
                 
                 
