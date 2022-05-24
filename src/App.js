@@ -17,6 +17,7 @@ import Navbar from "./Components/Shared/Navbar/Navbar";
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import AddProduct from "./Components/Pages/Dashboard/AddProduct";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="add-review" element={<AddReview />} />
             <Route path="my-profile" element={<MyProfile />} />
             <Route path="make-admin" element={<MakeAdmin />} />
+            <Route path="add-product" element={<AddProduct />} />
             <Route path="manage-all-order" element={<ManageAllOrder />} />
             <Route path="manage-product" element={<ManageProduct />} />
           </Route>
