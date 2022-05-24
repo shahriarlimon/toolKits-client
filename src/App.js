@@ -4,7 +4,8 @@ import Dashboard from "./Components/Pages/Dashboard/Dashboard";
 import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin";
 import ManageAllOrder from "./Components/Pages/Dashboard/ManageAllOrder";
 import ManageProduct from "./Components/Pages/Dashboard/ManageProduct";
-import MyOrders from "./Components/Pages/Dashboard/MyOrders";
+import MyOrders from "./Components/Pages/Dashboard/MyOrders/MyOrders";
+import Payment from "./Components/Pages/Dashboard/MyOrders/Payment";
 import MyProfile from "./Components/Pages/Dashboard/MyProfile";
 import Home from "./Components/Pages/Home/Home";
 import Order from "./Components/Pages/Home/Order";
@@ -21,7 +22,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="my-order" element={<MyOrders/>} />
+            <Route path="my-order" element={<MyOrders />} />
+            <Route path="payment/:id" element={<Payment/>}></Route>
             <Route path="add-review" element={<AddReview />} />
             <Route path="my-profile" element={<MyProfile />} />
             <Route path="make-admin" element={<MakeAdmin />} />
@@ -29,10 +31,11 @@ function App() {
             <Route path="manage-product" element={<ManageProduct />} />
           </Route>
           <Route path="/order/:id" element={<Order />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
-       {/*  <Footer /> */}
+        {/*  <Footer /> */}
       </Navbar>
     </div>
   );

@@ -22,7 +22,8 @@ const Order = () => {
     const order = {
       tool_name: tool.name,
       tool_id: tool._id,
-      tool_quantity: e.target.ordered_quantity.value,
+      tool_quantity: parseInt(e.target.ordered_quantity.value),
+      unit_price:tool.unit_price,
       img:tool.img,
       email: user.email,
       user_name: user.displayName,
