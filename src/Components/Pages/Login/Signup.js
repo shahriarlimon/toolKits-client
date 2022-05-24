@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
+  useAuthState,
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/FirebaseConfig.init";
+import useToken from "../../Hooks/useToken";
 import Loading from "../../Shared/Loading/Loading";
 
 const Signup = () => {
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, createEmailPassUser, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
-    const [updateProfile, updating, upadatingError] = useUpdateProfile(auth);
+  const [updateProfile, updating, upadatingError] = useUpdateProfile(auth);
   const {
     register,
     handleSubmit,
@@ -23,15 +25,21 @@ const Signup = () => {
     reset,
   } = useForm();
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
+  const [token] = useToken(user);
+  const location = useLocation();
+ useEffect(()=>{
+  if (token) {
+    navigate("/");
+  }
+ },[navigate,token])
   if (loading || googleLoading || updating) {
     <Loading />;
   }
-  if (user || googleUser) {
-    navigate("/");
-  }
-  const onSubmit = async(data) => {
-   await createUserWithEmailAndPassword(data.email, data.password);
-   await updateProfile({ displayName: data.name });
+
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
   };
   return (
     <div class="min-h-screen bg-accent flex items-center justify-center relative z-0 mt-10">

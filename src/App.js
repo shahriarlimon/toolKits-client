@@ -14,6 +14,9 @@ import RequireAuth from "./Components/Pages/Login/RequireAuth/RequireAuth";
 import Signup from "./Components/Pages/Login/Signup";
 import Footer from "./Components/Shared/Footer/Footer";
 import Navbar from "./Components/Shared/Navbar/Navbar";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -37,6 +40,7 @@ function App() {
         </Routes>
         {/*  <Footer /> */}
       </Navbar>
+      <ToastContainer />
     </div>
   );
 }
