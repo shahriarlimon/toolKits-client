@@ -19,26 +19,40 @@ const MyOrders = () => {
   if (isLoading) {
     return <Loading />;
   }
+
+ const handleDelete= (id)=>{
+  fetch(`http://localhost:5000/delete-order/${id}`, {
+    method: 'DELETE',
+  }).then(res=>res.json()).then(data=>{
+    if(data.success){
+      alert(data.message)
+      refetch();
+    }
+  })
+ }
+
+
+
   return (
     <div>
-      <h1>Tootal orders: {orders?.length}</h1>
+      <h1 className="text-3xl font-semibold text-gray-600 mb-3">Total orders: {orders?.length}</h1>
       <div class="overflow-x-auto">
         <table class="table w-full">
           <thead>
             <tr>
               <th>Name</th>
-              <th>Quantity</th>
+              <th> Ordered Quantity</th>
               <th>Payment</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {orders?.map((order) => (
               <tr>
                 <td>{order.tool_name}</td>
                 <td>{order.tool_quantity}</td>
-                <td>unpaid</td>
-                <td>delete</td>
+                <td><button  class="btn btn-sm">Unpaid</button></td>
+                <td><button onClick={()=>handleDelete(order._id)} class="btn btn-sm btn-error">Cancel</button></td>
               </tr>
             ))}
           </tbody>
