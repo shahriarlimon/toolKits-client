@@ -18,6 +18,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import AddProduct from "./Components/Pages/Dashboard/AddProduct";
+import NotFound from "./Components/NotFound/NotFound";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
         {/*  <Footer /> */}
       </Navbar>

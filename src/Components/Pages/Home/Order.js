@@ -8,6 +8,7 @@ const Order = () => {
   const { id } = useParams();
   const [tool, setTool] = useState({});
   const [user] = useAuthState(auth);
+  const [quantityError, setQuantityError] = useState("");
 
   useEffect(() => {
     const url = `http://localhost:5000/get-tool/${id}`;
@@ -17,14 +18,27 @@ const Order = () => {
         setTool(data);
       });
   }, [id]);
+  const verifQuantity = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue < tool.minimum_order_quantity) {
+      setQuantityError(
+        "Orders quantity can not be smaller than min order quantity!"
+      );
+    }
+    if (inputValue > tool.available_quantity) {
+      setQuantityError(
+        "Orders quantity can not be larger then available quantity!"
+      );
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const order = {
       tool_name: tool.name,
       tool_id: tool._id,
       tool_quantity: parseInt(e.target.ordered_quantity.value),
-      unit_price:tool.unit_price,
-      img:tool.img,
+      unit_price: tool.unit_price,
+      img: tool.img,
       email: user.email,
       user_name: user.displayName,
       phone: e.target.phone.value,
@@ -34,20 +48,19 @@ const Order = () => {
       method: "POST",
       body: JSON.stringify(order),
       headers: {
-        authorization:`${user.email} ${localStorage.getItem('access_token')}`,
+        authorization: `${user.email} ${localStorage.getItem("access_token")}`,
         "Content-type": "application/json; charset=UTF-8",
       },
     })
       .then((response) => response.json())
       .then((data) => {
-         if(data.status){
-           e.target.reset()
-           alert(data.message);
-         }
-         else{
-          e.target.reset()
+        if (data.status) {
+          e.target.reset();
           alert(data.message);
-         }
+        } else {
+          e.target.reset();
+          alert(data.message);
+        }
       });
   };
 
@@ -112,11 +125,15 @@ const Order = () => {
                 <span class="label-text">Quantity</span>
               </label>
               <input
+                onChange={verifQuantity}
                 name="ordered_quantity"
                 type="number"
                 defaultValue={tool.minimum_order_quantity}
                 class="input input-bordered"
               />
+              {quantityError && (
+                <p className="text-sm text-red-500 mt-2">{quantityError}</p>
+              )}
             </div>
             <div class="form-control">
               <label class="label">
@@ -143,7 +160,11 @@ const Order = () => {
               />
             </div>
             <div class="form-control mt-6">
-              <button type="submit" class="btn btn-primary">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                disabled={quantityError}
+              >
                 Place Order
               </button>
             </div>

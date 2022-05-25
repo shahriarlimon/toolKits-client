@@ -11,7 +11,7 @@ const Tools = () => {
   }
   return (
     <div className="mt-16  md:px-12 px-6">
-      <h1 className="text-3xl font-bold">Total tools:{tools?.length}</h1>
+      <h1 className="text-4xl font-bold">Our Latest Collection</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-8">
         {tools.map((tool) => (
           <Tool tool={tool} />

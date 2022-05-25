@@ -1,6 +1,7 @@
 import React from 'react';
 import BussinessSummary from './BussinessSummary';
 import Carosel from './Carosel';
+import Reviews from './Reviews';
 import Tools from './Tools';
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
            <Carosel/>
            <Tools/>
            <BussinessSummary/>
+           <Reviews/>
         </div>
     );
 };
