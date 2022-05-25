@@ -4,9 +4,11 @@ import DashboardSidebar from "./DashboardSidebar";
 
 const Dashboard = () => {
   return (
-    <DashboardSidebar>
+   <div className="min-h-min">
+      <DashboardSidebar>
       <Outlet />
     </DashboardSidebar>
+   </div>
   );
 };
 

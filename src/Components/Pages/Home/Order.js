@@ -65,7 +65,7 @@ const Order = () => {
   };
 
   return (
-    <div class="hero min-h-screen bg-base-200">
+    <div class="hero min-h-min bg-base-200">
       <div class="hero-content flex-col lg:flex-row">
         <div class="card lg:max-w-max bg-base-100 shadow-xl flex-1">
           <div class="card-body">

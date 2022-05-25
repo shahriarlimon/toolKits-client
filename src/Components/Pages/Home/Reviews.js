@@ -41,13 +41,13 @@ const Reviews = () => {
                   <div class="w-full flex mb-4 items-center">
                     <div class="avatar online placeholder">
                       <div class="bg-neutral-focus text-neutral-content rounded-full w-16">
-                        <span class="text-xl capitalize">{review.name.slice(0,1)}</span>
+                        <span class="text-xl capitalize">{review?.name?.slice(0,1)}</span>
                       </div>
                     </div>
 
                     <div class="flex-grow pl-3">
                       <h6 class="font-bold text-sm uppercase text-gray-600">
-                        {review.name}
+                        {review?.name}
                       </h6>
                       <p>
                         Given Rating:{" "}
@@ -62,7 +62,7 @@ const Reviews = () => {
                       <span class="lg:text-3xl text-2xl leading-none italic font-bold text-gray-400 mr-1">
                         "
                       </span>
-                      {review.description.slice(0, 200)}
+                      {review?.description?.slice(0, 200)}
                       <span class="text-lg leading-none italic font-bold text-gray-400 ml-1">
                         "
                       </span>

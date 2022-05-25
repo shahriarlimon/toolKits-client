@@ -26,7 +26,7 @@ function App() {
       <Navbar>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}>
             <Route path="my-order" element={<MyOrders />} />
             <Route path="payment/:id" element={<Payment/>}></Route>
             <Route path="add-review" element={<AddReview />} />
@@ -36,14 +36,16 @@ function App() {
             <Route path="manage-all-order" element={<ManageAllOrder />} />
             <Route path="manage-product" element={<ManageProduct />} />
           </Route>
-          <Route path="/order/:id" element={<Order />} />
+          <Route path="/order/:id" element={<RequireAuth><Order /></RequireAuth>} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<NotFound/>}/>
         </Routes>
-        {/*  <Footer /> */}
+        <Footer />
+        {/*  */}
       </Navbar>
+     
       <ToastContainer />
     </div>
   );

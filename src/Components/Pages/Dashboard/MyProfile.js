@@ -10,7 +10,7 @@ const MyProfile = () => {
   const onSubmit = data => {
     const profile ={
       name:user?.displayName,
-      email:user.email,
+      email:user?.email,
       education:data.education,
       location:data.location,
       phone:data.phone,
@@ -39,8 +39,8 @@ const MyProfile = () => {
    <div className='flex justify-between items-center mb-3'>
    <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Update your profile</h2>
     <div>
-      <p>Name: {user.displayName}</p>
-      <p>Email: {user.email}</p>
+      <p>Name: {user?.displayName}</p>
+      <p>Email: {user?.email}</p>
     </div>
    </div>
     <form onSubmit={handleSubmit(onSubmit)}>

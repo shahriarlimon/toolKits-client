@@ -49,7 +49,7 @@ const Navbar = ({children}) => {
               <ul class="menu menu-horizontal space-x-3">
                 {/* <!-- Navbar menu content here --> */}
                 <li><NavLink to="/">Home</NavLink></li>
-                <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+               {user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>}
                 <li><NavLink to="/about">About</NavLink></li>
                 <li><NavLink to="/blogs">Blogs</NavLink></li>
                { user && <button className='btn btn-ghost'>{user.displayName}</button>}
