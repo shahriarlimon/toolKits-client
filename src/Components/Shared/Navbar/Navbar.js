@@ -50,8 +50,8 @@ const Navbar = ({children}) => {
                 {/* <!-- Navbar menu content here --> */}
                 <li><NavLink to="/">Home</NavLink></li>
                {user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>}
-                <li><NavLink to="/about">About</NavLink></li>
                 <li><NavLink to="/blogs">Blogs</NavLink></li>
+                <li><NavLink to="/portfoliyo">My Portfoliyo</NavLink></li>
                { user && <button className='btn btn-ghost'>{user.displayName}</button>}
                 {user?<button onClick={()=>handleSignOut()} className='btn btn-ghost'>Logout</button>:<li><NavLink to="/login">Login</NavLink></li>}
                 

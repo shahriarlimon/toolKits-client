@@ -19,6 +19,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddProduct from "./Components/Pages/Dashboard/AddProduct";
 import NotFound from "./Components/NotFound/NotFound";
+import MyPortfoliyo from "./Components/Pages/MyPortfoliyo/MyPortfoliyo";
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
             <Route path="manage-product" element={<ManageProduct />} />
           </Route>
           <Route path="/order/:id" element={<RequireAuth><Order /></RequireAuth>} />
-
+          <Route path='portfoliyo' element={<MyPortfoliyo/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<NotFound/>}/>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../../Firebase/FirebaseConfig.init";
 
 const Order = () => {
@@ -29,7 +30,13 @@ const Order = () => {
       setQuantityError(
         "Orders quantity can not be larger then available quantity!"
       );
+      
+    }else{
+      setQuantityError('');
     }
+
+
+
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,10 +63,10 @@ const Order = () => {
       .then((data) => {
         if (data.status) {
           e.target.reset();
-          alert(data.message);
+          toast(data.message);
         } else {
           e.target.reset();
-          alert(data.message);
+          toast(data.message);
         }
       });
   };
@@ -160,13 +167,15 @@ const Order = () => {
               />
             </div>
             <div class="form-control mt-6">
-              <button
+             <button
                 type="submit"
                 class="btn btn-primary"
+               
                 disabled={quantityError}
               >
                 Place Order
               </button>
+              
             </div>
           </div>
         </form>
