@@ -10,7 +10,7 @@ const useTools = () => {
         
         
       } = useQuery("tools", () =>
-        fetch(`http://localhost:5000/get-tools`).then((res) => res.json())
+        fetch(` https://enigmatic-bastion-29863.herokuapp.com/get-tools`).then((res) => res.json())
       );
     return [tools,isLoading,refetch, error]
 };

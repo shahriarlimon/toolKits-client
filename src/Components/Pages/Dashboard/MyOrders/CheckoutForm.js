@@ -16,7 +16,7 @@ const CheckoutForm = ({ order }) => {
     const price = parseInt(unit_price)* parseInt(tool_quantity)
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch(' https://enigmatic-bastion-29863.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -82,7 +82,7 @@ const CheckoutForm = ({ order }) => {
                 order: _id,
                 transactionId: paymentIntent.id
             }
-            fetch(`http://localhost:5000/get-order/${_id}`, {
+            fetch(` https://enigmatic-bastion-29863.herokuapp.com/get-order/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',

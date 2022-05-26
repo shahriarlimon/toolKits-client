@@ -25,15 +25,15 @@ const Signup = () => {
     reset,
   } = useForm();
   const navigate = useNavigate();
-  const [user] = useAuthState(auth);
+  const [user,userLoading] = useAuthState(auth);
   const [token] = useToken(user);
   const location = useLocation();
  useEffect(()=>{
-  if (token) {
+  if (user) {
     navigate("/");
   }
- },[navigate,token])
-  if (loading || googleLoading || updating) {
+ },[navigate,user])
+  if (loading || googleLoading || updating || userLoading) {
     <Loading />;
   }
 

@@ -3,12 +3,16 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import auth from '../../../Firebase/FirebaseConfig.init';
+import Loading from '../Loading/Loading';
 
 const Navbar = ({children}) => {
-    const [user] = useAuthState(auth);
+    const [user,userLoading] = useAuthState(auth);
     const { pathname } = useLocation();
     const handleSignOut = ()=>{
         signOut(auth);
+    }
+    if (userLoading) {
+      return <Loading />;
     }
     return (
         <div class="drawer drawer-end">
@@ -19,7 +23,7 @@ const Navbar = ({children}) => {
           {pathname.includes("dashboard") && (
             <label
               tabindex='0'
-              for='my-drawer-2'
+              for='dashboard-sidebar'
               class='btn btn-ghost lg:hidden '
             >
               <svg
@@ -66,8 +70,13 @@ const Navbar = ({children}) => {
           <label for="my-drawer-3" class="drawer-overlay"></label> 
           <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
            {/*  <!-- Sidebar content here --> */}
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
+           <li><NavLink to="/">Home</NavLink></li>
+               {user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>}
+                <li><NavLink to="/blogs">Blogs</NavLink></li>
+                <li><NavLink to="/portfoliyo">My Portfoliyo</NavLink></li>
+               { user && <button className='btn btn-ghost'>{user.displayName}</button>}
+                {user?<button onClick={()=>handleSignOut()} className='btn btn-ghost'>Logout</button>:<li><NavLink to="/login">Login</NavLink></li>}
+                
             
           </ul>
           

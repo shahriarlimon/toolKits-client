@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../Firebase/FirebaseConfig.init";
+import { toast } from "react-toastify";
 
 const AddReview = () => {
   const {
@@ -13,18 +14,18 @@ const AddReview = () => {
   const [user] = useAuthState(auth);
   const onSubmit = (data) => {
       console.log(data,user?.displayName);
-    const url = "http://localhost:5000/create-review";
+    const url = " https://enigmatic-bastion-29863.herokuapp.com/create-review";
     fetch(url, {
       method: "POST",
       body: JSON.stringify({ ...data, name: user?.displayName }),
       headers: {
-        authorization: `${user.email} ${localStorage.getItem("accessToken")}`,
+        authorization: `${user.email} ${localStorage.getItem("access_token")}`,
         "Content-type": "application/json; charset=UTF-8",
       },
     })
       .then((response) => response.json())
       .then((result) => {
-        alert(result.message);
+        toast(result.message);
         reset();
       });
   };

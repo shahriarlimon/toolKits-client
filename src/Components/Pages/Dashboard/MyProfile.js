@@ -16,7 +16,7 @@ const MyProfile = () => {
       phone:data.phone,
       linkedin:data.linkedin
     };
-    fetch(`http://localhost:5000/create-profile`, {
+    fetch(` https://enigmatic-bastion-29863.herokuapp.com/create-profile`, {
   method: 'POST',
   body: JSON.stringify(profile),
   headers: {

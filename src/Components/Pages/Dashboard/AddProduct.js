@@ -13,7 +13,7 @@ const AddProduct = () => {
       img: e.target.img.value,
       description: e.target.description.value,
     };
-    fetch("http://localhost:5000/add-tool", {
+    fetch(" https://enigmatic-bastion-29863.herokuapp.com/add-tool", {
       method: "POST",
       body: JSON.stringify(tool),
       headers: {

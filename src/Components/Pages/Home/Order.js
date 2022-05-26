@@ -4,15 +4,17 @@ import { set, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../Firebase/FirebaseConfig.init";
+import Loading from "../../Shared/Loading/Loading";
 
 const Order = () => {
   const { id } = useParams();
   const [tool, setTool] = useState({});
-  const [user] = useAuthState(auth);
+  const [user, userLoading] = useAuthState(auth);
   const [quantityError, setQuantityError] = useState("");
+  const [quantity, setQuantity] = useState(tool?.minimum_order_quantity);
 
   useEffect(() => {
-    const url = `http://localhost:5000/get-tool/${id}`;
+    const url = ` https://enigmatic-bastion-29863.herokuapp.com/get-tool/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -21,22 +23,7 @@ const Order = () => {
   }, [id]);
   const verifQuantity = (e) => {
     const inputValue = e.target.value;
-    if (inputValue < tool.minimum_order_quantity) {
-      setQuantityError(
-        "Orders quantity can not be smaller than min order quantity!"
-      );
-    }
-    if (inputValue > tool.available_quantity) {
-      setQuantityError(
-        "Orders quantity can not be larger then available quantity!"
-      );
-      
-    }else{
-      setQuantityError('');
-    }
-
-
-
+    setQuantity(inputValue);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +38,7 @@ const Order = () => {
       phone: e.target.phone.value,
       address: e.target.address.value,
     };
-    fetch("http://localhost:5000/create-order", {
+    fetch(" https://enigmatic-bastion-29863.herokuapp.com/create-order", {
       method: "POST",
       body: JSON.stringify(order),
       headers: {
@@ -70,7 +57,9 @@ const Order = () => {
         }
       });
   };
-
+  if (userLoading) {
+    return <Loading />;
+  }
   return (
     <div class="hero min-h-min bg-base-200">
       <div class="hero-content flex-col lg:flex-row">
@@ -135,11 +124,18 @@ const Order = () => {
                 onChange={verifQuantity}
                 name="ordered_quantity"
                 type="number"
-                defaultValue={tool.minimum_order_quantity}
+                defaultValue={tool?.minimum_order_quantity}
                 class="input input-bordered"
               />
-              {quantityError && (
-                <p className="text-sm text-red-500 mt-2">{quantityError}</p>
+              {quantity >= tool?.available_quantity && (
+                <p className="text-sm text-red-500 mt-2">
+                  Input value cann't be larger than available quantity
+                </p>
+              )}
+              {quantity < tool?.minimum_order_quantity && (
+                <p className="text-sm text-red-500 mt-2">
+                  Input value cann't be smaller than min available quantity
+                </p>
               )}
             </div>
             <div class="form-control">
@@ -167,15 +163,16 @@ const Order = () => {
               />
             </div>
             <div class="form-control mt-6">
-             <button
+              <button
                 type="submit"
                 class="btn btn-primary"
-               
-                disabled={quantityError}
+                disabled={
+                  quantity >= tool?.available_quantity ||
+                  quantity < tool?.minimum_order_quantity
+                }
               >
                 Place Order
               </button>
-              
             </div>
           </div>
         </form>

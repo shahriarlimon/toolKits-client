@@ -21,6 +21,7 @@ import AddProduct from "./Components/Pages/Dashboard/AddProduct";
 import NotFound from "./Components/NotFound/NotFound";
 import MyPortfoliyo from "./Components/Pages/MyPortfoliyo/MyPortfoliyo";
 import Blogs from "./Components/Pages/Blogs/Blogs";
+import RequireAdmin from "./Components/Pages/Login/RequireAdmin/RequireAdmin";
 
 function App() {
   return (
@@ -33,10 +34,10 @@ function App() {
             <Route path="payment/:id" element={<Payment/>}></Route>
             <Route path="add-review" element={<AddReview />} />
             <Route path="my-profile" element={<MyProfile />} />
-            <Route path="make-admin" element={<MakeAdmin />} />
-            <Route path="add-product" element={<AddProduct />} />
-            <Route path="manage-all-order" element={<ManageAllOrder />} />
-            <Route path="manage-product" element={<ManageProduct />} />
+            <Route path="make-admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>} />
+            <Route path="add-product" element={<RequireAdmin><AddProduct /></RequireAdmin>} />
+            <Route path="manage-all-order" element={<RequireAdmin><ManageAllOrder /></RequireAdmin>} />
+            <Route path="manage-product" element={<RequireAdmin><ManageProduct /></RequireAdmin>} />
           </Route>
           <Route path="/order/:id" element={<RequireAuth><Order /></RequireAuth>} />
           <Route path='/portfoliyo' element={<MyPortfoliyo/>}/>

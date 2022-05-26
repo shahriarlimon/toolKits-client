@@ -16,7 +16,7 @@ const Login = () => {
 
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
-    const [user] = useAuthState(auth)
+    const [user,userLoading] = useAuthState(auth)
   const {
     register,
     handleSubmit,
@@ -30,12 +30,12 @@ const Login = () => {
   const [token] = useToken(user);
 
   useEffect(()=>{
-    if(token){
+    if(user){
         navigate(from, { replace: true });
     }
-  },[token,navigate,from]);
+  },[user,navigate,from]);
 
-  if (signInLoading || googleLoading) {
+  if (signInLoading || googleLoading || userLoading) {
     <Loading />;
   }
   const onSubmit = (data) => {

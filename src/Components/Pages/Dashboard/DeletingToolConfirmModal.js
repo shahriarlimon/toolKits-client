@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 const DeletingToolConfirmModal = ({deletingTool,refetch,setDeletingTool}) => {
  const {name,_id} = deletingTool;
  const handleDelete = ()=>{
-    fetch(`http://localhost:5000/delete-tool/${_id}`, {
+    fetch(` https://enigmatic-bastion-29863.herokuapp.com/delete-tool/${_id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('access_token')}`

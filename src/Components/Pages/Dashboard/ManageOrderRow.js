@@ -7,7 +7,7 @@ const ManageOrderRow = ({ order, index, refetch }) => {
   const handleDelete = () => {
     const proceed = window.confirm("Are you sure you want to delete?");
     if (proceed) {
-      fetch(`http://localhost:5000/delete-order-by-admin/${_id}`, {
+      fetch(` https://enigmatic-bastion-29863.herokuapp.com/delete-order-by-admin/${_id}`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -23,7 +23,7 @@ const ManageOrderRow = ({ order, index, refetch }) => {
     }
   };
   const handleShipment = ()=>{
-    fetch(`http://localhost:5000/ship-order/${_id}`, {
+    fetch(` https://enigmatic-bastion-29863.herokuapp.com/ship-order/${_id}`, {
         method: "PUT",
         headers: {
           authorization: `Bearer ${localStorage.getItem("access_token")}`,

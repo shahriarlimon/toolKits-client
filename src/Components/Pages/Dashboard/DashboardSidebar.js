@@ -9,12 +9,12 @@ const DashboardSidebar = ({ children }) => {
   const [admin] = useAdmin(user)
   return (
     <div class='drawer drawer-mobile mt-8 bg-green-200'>
-      <input id='my-drawer-2' type='checkbox' class='drawer-toggle' />
+      <input id='dashboard-sidebar' type='checkbox' class='drawer-toggle' />
       <div class='drawer-content flex flex-col items-center justify-center'>
         {children}
       </div>
       <div class='drawer-side bg-slate-100 '>
-        <label for='my-drawer-2' class='drawer-overlay '></label>
+        <label for='dashboard-sidebar' class='drawer-overlay '></label>
         <ul class='menu p-4 overflow-y-auto w-80 text-base-content'>
        { (user && !admin) && <>
         <li>

@@ -2,6 +2,7 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../../../Firebase/FirebaseConfig.init";
 import Loading from "../../../Shared/Loading/Loading";
 const MyOrders = () => {
@@ -12,7 +13,7 @@ const MyOrders = () => {
     refetch,
     error,
   } = useQuery("orders", () =>
-    fetch(`http://localhost:5000/get-orders/${user.email}`).then((res) =>
+    fetch(` https://enigmatic-bastion-29863.herokuapp.com/get-orders/${user.email}`).then((res) =>
       res.json()
     )
   );
@@ -21,16 +22,19 @@ const MyOrders = () => {
   }
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/delete-order/${id}`, {
+  const proceed = window.confirm('Are you sure you want to delete?');
+  if(proceed){
+    fetch(` https://enigmatic-bastion-29863.herokuapp.com/delete-order/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          alert(data.message);
+          toast(data.message);
           refetch();
         }
       });
+  }
   };
 
   return (

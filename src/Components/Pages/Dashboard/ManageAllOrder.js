@@ -10,7 +10,7 @@ const ManageAllOrder = () => {
     refetch,
     error,
   } = useQuery("orders", () =>
-    fetch(`http://localhost:5000/get-orders`).then((res) => res.json())
+    fetch(` https://enigmatic-bastion-29863.herokuapp.com/get-orders`).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading />;
