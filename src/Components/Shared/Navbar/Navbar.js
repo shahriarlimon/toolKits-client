@@ -19,7 +19,7 @@ const Navbar = ({children}) => {
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
         <div class="drawer-content flex flex-col">
          {/*  <!-- Navbar --> */}
-          <div class="w-full navbar bg-white">
+          <div class="w-full navbar text-white bg-[#FFA500] shadow-gray-300 ">
           {pathname.includes("dashboard") && (
             <label
               tabindex='0'
@@ -42,7 +42,7 @@ const Navbar = ({children}) => {
               </svg>
             </label>
           )}
-          <div class="flex-1 px-2 mx-2 text-2xl">ToolKits</div>
+          <div class="flex-1 px-2 mx-2 text-2xl">TOOLKITS</div>
             <div class="flex-none lg:hidden">
               <label for="my-drawer-3" class="btn btn-square btn-ghost">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -52,12 +52,12 @@ const Navbar = ({children}) => {
             <div class="flex-none hidden lg:block">
               <ul class="menu menu-horizontal space-x-3">
                 {/* <!-- Navbar menu content here --> */}
-                <li><NavLink to="/">Home</NavLink></li>
+                <li><NavLink className={"bg-transparent"} to="/">Home</NavLink></li>
                {user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>}
-                <li><NavLink to="/blogs">Blogs</NavLink></li>
-                <li><NavLink to="/portfoliyo">My Portfoliyo</NavLink></li>
+                <li><NavLink className="bg-transparent" to="/blogs">Blogs</NavLink></li>
+                <li><NavLink className={"bg-transparent"} to="/portfoliyo">My Portfoliyo</NavLink></li>
                { user && <button className='btn btn-ghost'>{user.displayName}</button>}
-                {user?<button onClick={()=>handleSignOut()} className='btn btn-ghost'>Logout</button>:<li><NavLink to="/login">Login</NavLink></li>}
+                {user?<button onClick={()=>handleSignOut()} className='btn btn-ghost'>Logout</button>:<li><NavLink className={"bg-transparent"} to="/login">Login</NavLink></li>}
                 
                 
               </ul>
@@ -68,14 +68,14 @@ const Navbar = ({children}) => {
         </div> 
         <div class="drawer-side">
           <label for="my-drawer-3" class="drawer-overlay"></label> 
-          <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+          <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 space-y-3">
            {/*  <!-- Sidebar content here --> */}
-           <li><NavLink to="/">Home</NavLink></li>
-               {user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>}
-                <li><NavLink to="/blogs">Blogs</NavLink></li>
-                <li><NavLink to="/portfoliyo">My Portfoliyo</NavLink></li>
+           <li><NavLink className="bg-[#FFA500] text-white" to="/">Home</NavLink></li>
+               {user && <li><NavLink className="bg-[#FFA500] text-white" to="/dashboard">Dashboard</NavLink></li>}
+                <li><NavLink className="bg-[#FFA500] text-white" to="/blogs">Blogs</NavLink></li>
+                <li><NavLink className="bg-[#FFA500] text-white" to="/portfoliyo">My Portfoliyo</NavLink></li>
                { user && <button className='btn btn-ghost'>{user.displayName}</button>}
-                {user?<button onClick={()=>handleSignOut()} className='btn btn-ghost'>Logout</button>:<li><NavLink to="/login">Login</NavLink></li>}
+                {user?<button onClick={()=>handleSignOut()} className='btn btn-ghost'>Logout</button>:<li><NavLink className="bg-[#FFA500] text-white" to="/login">Login</NavLink></li>}
                 
             
           </ul>
