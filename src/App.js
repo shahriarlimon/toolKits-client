@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import './App.css';
 import AddReview from "./Components/Pages/Dashboard/AddReview";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard";
 import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin";
@@ -22,6 +23,9 @@ import NotFound from "./Components/NotFound/NotFound";
 import MyPortfoliyo from "./Components/Pages/MyPortfoliyo/MyPortfoliyo";
 import Blogs from "./Components/Pages/Blogs/Blogs";
 import RequireAdmin from "./Components/Pages/Login/RequireAdmin/RequireAdmin";
+import ToolDetailsPage from "./Components/Pages/Home/ToolDetailsPage";
+import Cart from "./Components/Pages/Cart/Cart";
+import Shipping from "./Components/Pages/Cart/Shipping";
 
 function App() {
   return (
@@ -29,9 +33,12 @@ function App() {
       <Navbar>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/:id" element={<ToolDetailsPage />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/shipping" element={<Shipping />} />
           <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}>
             <Route path="my-order" element={<MyOrders />} />
-            <Route path="payment/:id" element={<Payment/>}></Route>
+            <Route path="payment/:id" element={<Payment />}></Route>
             <Route path="add-review" element={<AddReview />} />
             <Route path="my-profile" element={<MyProfile />} />
             <Route path="make-admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>} />
@@ -40,17 +47,16 @@ function App() {
             <Route path="manage-product" element={<RequireAdmin><ManageProduct /></RequireAdmin>} />
           </Route>
           <Route path="/order/:id" element={<RequireAuth><Order /></RequireAuth>} />
-          <Route path='/portfoliyo' element={<MyPortfoliyo/>}/>
-          <Route path='/blogs' element={<Blogs/>}/>
+          <Route path='/portfoliyo' element={<MyPortfoliyo />} />
+          <Route path='/blogs' element={<Blogs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="*" element={<NotFound/>}/>
+          <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
         {/*  */}
+        <ToastContainer />
       </Navbar>
-     
-      <ToastContainer />
+
     </div>
   );
 }

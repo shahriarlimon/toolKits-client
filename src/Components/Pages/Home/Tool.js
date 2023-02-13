@@ -1,24 +1,30 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Tool = ({tool}) => {
-    const {_id,name,img,description,minimum_order_quantity,available_quantity,unit_price} = tool;
-    const navigate = useNavigate();
-    return (
-        <div class="card card-compact lg:max-w-mx bg-white shadow-xl">
-        <figure><img className='h-[200px]' src={img} alt="Shoes" /></figure>
-        <div class="card-body">
-          <h2 class="card-title">{name}</h2>
-          <p>Available Quantity: {available_quantity}</p>
-          <p>Minumum Order Quantity: {minimum_order_quantity}</p>
-          <p>Unit Price: ${unit_price}</p>
-          <p>{description.slice(0,200)+ '...'}</p>
-          <div class="card-actions justify-end">
-            <button onClick={()=>navigate(`/order/${_id}`)} class="btn btn-primary">Order Now</button>
-          </div>
-        </div>
+const Tool = ({ tool }) => {
+  const navigate = useNavigate();
+  return (
+    <div className="max-w-sm  rounded overflow-hidden shadow-lg">
+      <img className="w-full h-64" src={tool?.images[0]?.url} alt={tool?.name} />
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">{tool?.name}</div>
       </div>
-    );
+      <div className="px-6 py-4">
+        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">Price: ${tool.price}</span>
+        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">Stock: {tool.stock}</span>
+        <span className=" mx-auto my-2 inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">Minimum Order: {tool.minimumOrderQuantity}</span>
+
+      </div>
+      <div className="px-6 py-4">
+        <button onClick={() => navigate(`/${tool?._id}`)} className=" w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+          View More
+        </button>
+      </div>
+    </div>
+
+
+  );
 };
 
 export default Tool;
+

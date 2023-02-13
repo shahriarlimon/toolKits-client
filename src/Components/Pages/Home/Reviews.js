@@ -9,7 +9,7 @@ const Reviews = () => {
     refetch,
     error,
   } = useQuery("orders", () =>
-    fetch(` https://enigmatic-bastion-29863.herokuapp.com/get-reviews`).then((res) => res.json())
+    fetch(``).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading />;

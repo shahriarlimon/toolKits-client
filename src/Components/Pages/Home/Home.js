@@ -9,13 +9,13 @@ import Tools from './Tools';
 const Home = () => {
     return (
         <div>
-           <Carosel/>
-           <Tools/>
-           <BussinessSummary/>
-           <Reviews/>
-          <Newsletter/>
-          <ContactUs/>
-         
+            <Carosel />
+            <Tools />
+            <BussinessSummary />
+            {/*  <Reviews/> */}
+            <Newsletter />
+            <ContactUs />
+
         </div>
     );
 };
