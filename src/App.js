@@ -26,8 +26,25 @@ import RequireAdmin from "./Components/Pages/Login/RequireAdmin/RequireAdmin";
 import ToolDetailsPage from "./Components/Pages/Home/ToolDetailsPage";
 import Cart from "./Components/Pages/Cart/Cart";
 import Shipping from "./Components/Pages/Cart/Shipping";
+import ShippingDetailsPreview from "./Components/Pages/Cart/ShippingDetailsPreview";
+import CheckoutForm from "./Components/Pages/Cart/CheckoutForm";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import OrderSuccess from "./Components/Pages/Cart/OrderSuccess";
 
 function App() {
+  const [stripeApiKey, setStripeApiKey] = useState("");
+  async function getStripeApiKey() {
+    const { data } = await axios.get('http://localhost:5000/api/v1/payment/stripeapikey', {
+      withCredentials: true
+    })
+    setStripeApiKey(data.stripeApiKey)
+  }
+  useEffect(() => {
+    getStripeApiKey()
+  }, [])
   return (
     <div>
       <Navbar>
@@ -36,6 +53,13 @@ function App() {
           <Route path="/:id" element={<ToolDetailsPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/shipping" element={<Shipping />} />
+          <Route path="/shippingPreview" element={<ShippingDetailsPreview />} />
+          <Route path="/checkout" element={<CheckoutForm />} />
+          {stripeApiKey && (<Route path="/process/payment" element={<Elements stripe={loadStripe(stripeApiKey)}>
+            <CheckoutForm />
+          </Elements>} >
+          </Route>)}
+          <Route path="/order/success" element={<OrderSuccess />} />
           <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}>
             <Route path="my-order" element={<MyOrders />} />
             <Route path="payment/:id" element={<Payment />}></Route>

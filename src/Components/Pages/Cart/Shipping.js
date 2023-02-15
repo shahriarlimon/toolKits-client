@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaShippingFast } from 'react-icons/fa';
 import { Country, State } from "country-state-city";
+import { useNavigate } from 'react-router-dom';
 function Shipping() {
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -8,10 +9,12 @@ function Shipping() {
     const [phone, setPhone] = useState("");
     const [country, setCountry] = useState("");
     const [state, setState] = useState("");
+    const navigate = useNavigate()
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(address, city, zipCode, phone, country, state);
+        navigate("/shippingPreview")
     };
     return (
         <div className='mx-auto'>
