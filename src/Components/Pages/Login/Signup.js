@@ -6,12 +6,14 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/FirebaseConfig.init";
-import useToken from "../../Hooks/useToken";
+import { registerUser } from "../../../redux/actions/userActions";
 import Loading from "../../Shared/Loading/Loading";
 
 const Signup = () => {
+  const dispatch = useDispatch()
   const [createUserWithEmailAndPassword, createEmailPassUser, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -26,7 +28,7 @@ const Signup = () => {
   } = useForm();
   const navigate = useNavigate();
   const [user, userLoading] = useAuthState(auth);
-  const [token] = useToken(user);
+  /*   const [token] = useToken(user); */
   const location = useLocation();
   useEffect(() => {
     if (user) {
@@ -38,9 +40,26 @@ const Signup = () => {
   }
 
   const onSubmit = async (data) => {
-    await createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile({ displayName: data.name });
+    try {
+      await createUserWithEmailAndPassword(data.email, data.password);
+      await updateProfile({ displayName: data.name });
+      if (auth.currentUser) {
+        dispatch(registerUser({ name: auth.currentUser.displayName, email: auth.currentUser.email }))
+      }
+    } catch (error) {
+      console.log(error)
+    }
   };
+  const googleSubmit = async () => {
+    try {
+      await signInWithGoogle()
+      if (auth.currentUser) {
+        dispatch(registerUser({ name: auth.currentUser.displayName, email: auth.currentUser.email }))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div class="flex h-screen items-center justify-center my-10 py-10">
       <div class="w-full md:w-64 p-6 bg-white rounded-lg shadow-2xl">
@@ -159,7 +178,7 @@ const Signup = () => {
             </p>
           )}
           <button
-            onClick={() => signInWithGoogle()}
+            onClick={() => googleSubmit()}
             className="bg-transparent w-full hover:bg-blue-500 hover:text-white text-blue-500 font-medium py-2 px-4 border border-blue-500 rounded-lg transition ease-in-out duration-300 text-center"
           >
             continue with google

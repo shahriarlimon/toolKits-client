@@ -1,4 +1,4 @@
-import { signOut } from 'firebase/auth';
+/* import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate, useLocation } from 'react-router-dom';
@@ -22,4 +22,4 @@ const RequireAdmin = ({children}) => {
     return children;
 };
 
-export default RequireAdmin;
+export default RequireAdmin; */

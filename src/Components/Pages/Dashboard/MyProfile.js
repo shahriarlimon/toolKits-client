@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import auth from '../../../Firebase/FirebaseConfig.init';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from 'react-hook-form';
@@ -82,4 +82,4 @@ const MyProfile = () => {
     );
 };
 
-export default MyProfile;
+export default MyProfile; */

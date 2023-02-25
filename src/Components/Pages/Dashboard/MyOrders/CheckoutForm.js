@@ -1,4 +1,4 @@
-
+/* 
    
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
@@ -133,4 +133,4 @@ const CheckoutForm = ({ order }) => {
     );
 };
 
-export default CheckoutForm;
+export default CheckoutForm; */

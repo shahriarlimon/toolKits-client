@@ -5,8 +5,11 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import auth from '../../../Firebase/FirebaseConfig.init';
 import Loading from '../Loading/Loading';
 import { GiDrill } from "react-icons/gi"
+import { useSelector } from 'react-redux';
 
 const Navbar = ({ children }) => {
+  const { cartItems } = useSelector((state) => state.cart)
+  const { user: User } = useSelector((state) => state.user)
   const [user, userLoading] = useAuthState(auth);
   const { pathname } = useLocation();
   const handleSignOut = () => {
@@ -54,9 +57,9 @@ const Navbar = ({ children }) => {
             <ul class="menu menu-horizontal space-x-3">
               {/* <!-- Navbar menu content here --> */}
               <li><NavLink className={"bg-transparent"} to="/">Home</NavLink></li>
-              <li><NavLink className={"bg-transparent"} to="/cart">Cart</NavLink></li>
+              <li><NavLink className={"bg-transparent"} to="/cart">Cart <div className="badge badge-md -ml-3 mb-1">{cartItems.length ? cartItems.length : 0}</div></NavLink></li>
 
-              {user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>}
+              {User.role === "user" ? <li><NavLink className={"bg-transparent"} to="/user/dashboard">Dashboard</NavLink></li> : <li><NavLink className={"bg-transparent"} to="/admin/dashboard">Dashboard</NavLink></li>}
               <li><NavLink className="bg-transparent" to="/blogs">Blogs</NavLink></li>
               <li><NavLink className={"bg-transparent"} to="/portfoliyo">My Portfoliyo</NavLink></li>
               {user && <button className='btn btn-ghost'>{user.displayName}</button>}
@@ -74,12 +77,12 @@ const Navbar = ({ children }) => {
         <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 space-y-3">
           {/*  <!-- Sidebar content here --> */}
           <li><NavLink className="bg-[#A52A2A] text-white" to="/">Home</NavLink></li>
-          <li><NavLink className="bg-[#A52A2A] text-white" to="/cart">Cart</NavLink></li>
+          <li><NavLink className="bg-[#A52A2A] text-white" to="/cart">Cart <div className="badge badge-md -ml-3 mb-1">{cartItems.length ? cartItems.length : 0}</div></NavLink></li>
           {user && <li><NavLink className="bg-[#A52A2A] text-white" to="/dashboard">Dashboard</NavLink></li>}
           <li><NavLink className="bg-[#A52A2A] text-white" to="/blogs">Blogs</NavLink></li>
           <li><NavLink className="bg-[#A52A2A] text-white" to="/portfoliyo">My Portfoliyo</NavLink></li>
           {user && <button className='btn btn-ghost'>{user.displayName}</button>}
-          {user ? <button onClick={() => handleSignOut()} className='btn btn-ghost'>Logout</button> : <li><NavLink className="bg-[#FFA500] text-white" to="/login">Login</NavLink></li>}
+          {user ? <button onClick={() => handleSignOut()} className='btn btn-ghost'>Logout</button> : <li><NavLink className="bg-[#A52A2A] text-white" to="/login">Login</NavLink></li>}
         </ul>
 
       </div>

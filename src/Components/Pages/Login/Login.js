@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link,  useNavigate,useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import auth from "../../../Firebase/FirebaseConfig.init";
 import {
   useAuthState,
@@ -8,7 +8,8 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import Loading from "../../Shared/Loading/Loading";
-import useToken from "../../Hooks/useToken";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../redux/actions/userActions";
 
 const Login = () => {
   const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
@@ -16,7 +17,7 @@ const Login = () => {
 
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
-    const [user,userLoading] = useAuthState(auth)
+  const [user, userLoading] = useAuthState(auth)
   const {
     register,
     handleSubmit,
@@ -27,20 +28,38 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
-  const [token] = useToken(user);
+  const dispatch = useDispatch()
 
-  useEffect(()=>{
-    if(user){
-        navigate(from, { replace: true });
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
     }
-  },[user,navigate,from]);
+  }, [user, navigate, from]);
 
   if (signInLoading || googleLoading || userLoading) {
     <Loading />;
   }
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
+  const onSubmit = async (data) => {
+    try {
+      await signInWithEmailAndPassword(data.email, data.password);
+      if (auth.currentUser) {
+        dispatch(loginUser({ email: auth.currentUser.email }))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
   };
+  const googleSubmit = async () => {
+    try {
+      await signInWithGoogle()
+      if (auth.currentUser) {
+        dispatch(register({ email: auth.currentUser.email }))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div class="flex h-screen items-center justify-center my-10 py-10">
       <div class="w-full md:w-64 p-6 bg-white rounded-lg shadow-2xl">
@@ -80,7 +99,7 @@ const Login = () => {
             </label>
           </div>
           <div class="form-control mb-4">
-            <label  className="block text-gray-700 font-medium mb-2">
+            <label className="block text-gray-700 font-medium mb-2">
               Password
             </label>
             <input
@@ -142,7 +161,7 @@ const Login = () => {
             </p>
           )}
           <button
-            onClick={() => signInWithGoogle()}
+            onClick={() => googleSubmit()}
             className="bg-transparent w-full hover:bg-blue-500 hover:text-white text-blue-500 font-medium py-2 px-4 border border-blue-500 rounded-lg transition ease-in-out duration-300 text-center"
           >
             continue with google

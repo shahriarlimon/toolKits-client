@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { FaShippingFast } from 'react-icons/fa';
 import { Country, State } from "country-state-city";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux';
+import { saveShippingInfo } from '../../../redux/actions/cartActions';
 function Shipping() {
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -10,10 +13,23 @@ function Shipping() {
     const [country, setCountry] = useState("");
     const [state, setState] = useState("");
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(address, city, zipCode, phone, country, state);
+        if (phone.length < 11 || phone.length > 11) {
+            toast.error("Phone Number should be 11 digits Long");
+            return;
+        }
+        const data = {
+            address,
+            city,
+            country,
+            state,
+            zipCode,
+            phone
+        }
+        dispatch(saveShippingInfo(data))
         navigate("/shippingPreview")
     };
     return (
@@ -33,6 +49,7 @@ function Shipping() {
                         id="address"
                         type="text"
                         placeholder="1234 Main St"
+                        required={true}
                         value={address}
                         onChange={(event) => setAddress(event.target.value)}
                     />
@@ -45,6 +62,7 @@ function Shipping() {
                         className="w-full p-3 border border-gray-300 rounded focus:outline-none"
                         id="city"
                         type="text"
+                        required={true}
                         placeholder="San Francisco"
                         value={city}
                         onChange={(event) => setCity(event.target.value)}
@@ -58,6 +76,7 @@ function Shipping() {
                         className="w-full p-3 border border-gray-300 rounded focus:outline-none"
                         id="zipCode"
                         type="text"
+                        required={true}
                         placeholder="94109"
                         value={zipCode}
                         onChange={(event) => setZipCode(event.target.value)}
@@ -70,6 +89,7 @@ function Shipping() {
                     <input
                         className="w-full p-3 border border-gray-300 rounded focus:outline-none"
                         id="phone"
+                        required={true}
                         type="text"
                         placeholder="(555) 555-5555"
                         value={phone}
@@ -83,6 +103,7 @@ function Shipping() {
                     <select
                         className="w-full p-3 border border-gray-300 rounded focus:outline-none"
                         id="country"
+                        required={true}
                         placeholder="United States"
                         value={country}
                         onChange={(event) => setCountry(event.target.value)}
@@ -104,10 +125,10 @@ function Shipping() {
                         className="w-full p-3 border border-gray-300 rounded focus:outline-none"
                         id="state"
                         placeholder="san-francisco"
-                        value={country}
+                        required={true}
+                        value={state}
                         onChange={(event) => setState(event.target.value)}
                     >
-                        <option value="">State</option>
                         <option value="">State</option>
                         {State &&
                             State.getStatesOfCountry(country).map((item) => (

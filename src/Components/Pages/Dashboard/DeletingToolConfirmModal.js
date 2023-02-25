@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { toast } from 'react-toastify';
 
 const DeletingToolConfirmModal = ({deletingTool,refetch,setDeletingTool}) => {
@@ -36,4 +36,4 @@ const DeletingToolConfirmModal = ({deletingTool,refetch,setDeletingTool}) => {
     );
 };
 
-export default DeletingToolConfirmModal;
+export default DeletingToolConfirmModal; */

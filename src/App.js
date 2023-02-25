@@ -1,11 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import './App.css';
-import AddReview from "./Components/Pages/Dashboard/AddReview";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard";
 import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin";
-import ManageAllOrder from "./Components/Pages/Dashboard/ManageAllOrder";
 import ManageProduct from "./Components/Pages/Dashboard/ManageProduct";
-import MyOrders from "./Components/Pages/Dashboard/MyOrders/MyOrders";
 import Payment from "./Components/Pages/Dashboard/MyOrders/Payment";
 import MyProfile from "./Components/Pages/Dashboard/MyProfile";
 import Home from "./Components/Pages/Home/Home";
@@ -33,8 +30,21 @@ import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./Components/Pages/Cart/OrderSuccess";
+import ConfirmOrder from "./Components/Pages/Cart/ConfirmOrder";
+import { loadUser } from "./redux/actions/userActions";
+import store from "./redux/store";
+import Success from "./Components/Pages/Cart/Success";
+import { useSelector } from "react-redux";
+import ProtectedRoute from "./Components/Route/ProtectedRoute";
+import UserDashboard from "./Components/Pages/User/UserDashboard";
+import MyOrders from "./Components/Pages/User/MyOrders";
+import UserProfile from "./Components/Pages/User/UserProfile";
+import AddReview from "./Components/Pages/User/AddReview";
+import AdminDashboard from "./Components/Pages/Admin/AdminDashboard";
+import ManageAllOrders from "./Components/Pages/Admin/ManageAllOrders";
 
 function App() {
+  const { user, isAuthenticated } = useSelector((state) => state.user)
   const [stripeApiKey, setStripeApiKey] = useState("");
   async function getStripeApiKey() {
     const { data } = await axios.get('http://localhost:5000/api/v1/payment/stripeapikey', {
@@ -43,6 +53,7 @@ function App() {
     setStripeApiKey(data.stripeApiKey)
   }
   useEffect(() => {
+    store.dispatch(loadUser())
     getStripeApiKey()
   }, [])
   return (
@@ -52,15 +63,33 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/:id" element={<ToolDetailsPage />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/shipping" element={<Shipping />} />
-          <Route path="/shippingPreview" element={<ShippingDetailsPreview />} />
-          <Route path="/checkout" element={<CheckoutForm />} />
-          {stripeApiKey && (<Route path="/process/payment" element={<Elements stripe={loadStripe(stripeApiKey)}>
-            <CheckoutForm />
-          </Elements>} >
-          </Route>)}
-          <Route path="/order/success" element={<OrderSuccess />} />
-          <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}>
+          {
+            user?.role === "user" && <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/order/confirm" element={<ConfirmOrder />} />
+              <Route path="/shippingPreview" element={<ShippingDetailsPreview />} />
+              <Route path="/checkout" element={<CheckoutForm />} />
+              {stripeApiKey && (<Route path="/process/payment" element={<Elements stripe={loadStripe(stripeApiKey)}>
+                <CheckoutForm />
+              </Elements>} >
+              </Route>)}
+              <Route path="/order/success" element={<Success />} />
+              <Route path="/dashboard" element={<UserDashboard />}>
+                <Route path="myOrder" element={<MyOrders />} />
+                <Route path="my-profile" element={<UserProfile />} />
+                <Route path="add-review" element={<AddReview />} />
+              </Route>
+            </Route>
+          }
+          <Route element={<ProtectedRoute />} isAdmin={user?.role === "admin" ? true : false} adminRoute={true} isAuthenticated={isAuthenticated}>
+            <Route path="/admin/dashboard" element={<AdminDashboard />}>
+              <Route path="my-profile" element={< UserProfile />} />
+              <Route path="manage-all-orders" element={<ManageAllOrders />} />
+              <Route path="add-review" element={<AddReview />} />
+            </Route>
+
+          </Route>
+          {/* <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}>
             <Route path="my-order" element={<MyOrders />} />
             <Route path="payment/:id" element={<Payment />}></Route>
             <Route path="add-review" element={<AddReview />} />
@@ -69,7 +98,7 @@ function App() {
             <Route path="add-product" element={<RequireAdmin><AddProduct /></RequireAdmin>} />
             <Route path="manage-all-order" element={<RequireAdmin><ManageAllOrder /></RequireAdmin>} />
             <Route path="manage-product" element={<RequireAdmin><ManageProduct /></RequireAdmin>} />
-          </Route>
+          </Route> */}
           <Route path="/order/:id" element={<RequireAuth><Order /></RequireAuth>} />
           <Route path='/portfoliyo' element={<MyPortfoliyo />} />
           <Route path='/blogs' element={<Blogs />} />

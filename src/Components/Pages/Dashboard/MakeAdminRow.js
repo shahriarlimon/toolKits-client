@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { toast } from "react-toastify";
 
 const MakeAdminRow = ({ user, refetch }) => {
@@ -41,3 +41,4 @@ const MakeAdminRow = ({ user, refetch }) => {
 };
 
 export default MakeAdminRow;
+ */

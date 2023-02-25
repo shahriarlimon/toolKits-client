@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import useTools from '../../Hooks/useTools';
 import Loading from '../../Shared/Loading/Loading';
 import DeletingToolConfirmModal from './DeletingToolConfirmModal';
@@ -47,4 +47,4 @@ const ManageProduct = () => {
     );
 };
 
-export default ManageProduct;
+export default ManageProduct; */

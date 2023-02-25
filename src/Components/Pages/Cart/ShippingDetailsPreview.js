@@ -10,6 +10,14 @@ const ShippingDetailsPreview = () => {
         (acc, item) => acc + item.quantity * item.price,
         0
     );
+    const proceedToPayment = () => {
+        const data = {
+            totalPrice: subtotal
+        }
+        sessionStorage.setItem("orderInfo", JSON.stringify(data))
+        navigate("/process/payment")
+    }
+
     return (
         <div className="container mx-auto px-4 py-6">
             <h1 className="text-2xl font-bold mb-4">Shipping Details Preview</h1>
@@ -59,7 +67,7 @@ const ShippingDetailsPreview = () => {
                     ))}
                     <div className="flex justify-between mt-4">
                         <p className='text-xl font-bold'>Total : <span className='text-orange-400'>${subtotal}</span> </p>
-                        <button onClick={()=>navigate("/process/payment")} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                        <button onClick={() => proceedToPayment()} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                             Proceed to Checkout
                         </button>
                     </div>

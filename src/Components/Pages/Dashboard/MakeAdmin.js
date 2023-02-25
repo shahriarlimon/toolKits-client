@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../Shared/Loading/Loading';
 import MakeAdminRow from './MakeAdminRow';
@@ -40,4 +40,4 @@ const MakeAdmin = () => {
     );
 };
 
-export default MakeAdmin;
+export default MakeAdmin; */

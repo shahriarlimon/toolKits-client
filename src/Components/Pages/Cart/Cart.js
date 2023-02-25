@@ -1,10 +1,19 @@
 import React, { Fragment } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+import { removeItemsFromCart } from '../../../redux/actions/cartActions';
 
 const Cart = () => {
     const { cartItems } = useSelector((state) => state.cart);
-    const navigate = useNavigate()
+    const total = cartItems.reduce(
+        (acc, item) => acc + (item.quantity * item.price),
+        0
+    )
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const removeCartItem = (id) => {
+        dispatch(removeItemsFromCart(id))
+    }
     return <Fragment>
         <div class="container mx-auto px-4">
             <h1 class="text-2xl font-bold mb-4 mt-4">Shopping Cart</h1>
@@ -28,9 +37,9 @@ const Cart = () => {
                                     <td class="px-4 py-2">
                                         <input type="number" class="w-16 border border-gray-400 p-2 focus:outline-none" value={item.quantity} />
                                     </td>
-                                    <td class="px-4 py-2">${item.price * item.quantity}</td>
+                                    <td class="px-4 py-2">${(item.price * item.quantity).toFixed(2)}</td>
                                     <td class="px-4 py-2">
-                                        <button class="bg-red-500 text-white p-2 rounded">Remove</button>
+                                        <button onClick={() => removeCartItem(item?._id)} class="bg-red-500 text-white p-2 rounded">Remove</button>
                                     </td>
                                 </tr>))
                             }
@@ -40,16 +49,10 @@ const Cart = () => {
                 <div class="w-full md:w-1/4 py-4 md:py-0 md:pl-4">
                     <div class="bg-gray-200 p-4">
                         <h3 class="text-lg font-bold mb-4">Order Summary</h3>
-                        <p class="mb-2">Subtotal: <span class="float-right">{`$${cartItems.reduce(
-                            (acc, item) => acc + item.quantity * item.price,
-                            0
-                        )}`}</span></p>
+                        <p class="mb-2">Subtotal: <span class="float-right">{total.toFixed(2)}</span></p>
                         <p class="mb-2">Shipping: <span class="float-right">Free</span></p>
-                        <p class="mb-2 font-bold">Total: <span class="float-right">{`$${cartItems.reduce(
-                            (acc, item) => acc + item.quantity * item.price,
-                            0
-                        )}`}</span></p>
-                        <button onClick={()=>navigate(`/shipping`)} class="w-full bg-red-500 text-white py-2 mt-4 hover:bg-red-600">Checkout</button>
+                        <p class="mb-2 font-bold">Total: <span class="float-right">{total.toFixed(2)}</span></p>
+                        <button onClick={() => navigate(`/shipping`)} class="w-full bg-red-500 text-white py-2 mt-4 hover:bg-red-600">Checkout</button>
                     </div>
                 </div>
             </div>

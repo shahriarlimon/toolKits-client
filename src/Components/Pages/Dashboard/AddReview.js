@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../Firebase/FirebaseConfig.init";
@@ -93,3 +93,4 @@ const AddReview = () => {
 };
 
 export default AddReview;
+ */

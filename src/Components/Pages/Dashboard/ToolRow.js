@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 
 const ToolRow = ({tool,index,refetch,setDeletingTool}) => {
     const {name,unit_price,available_quantity ,minimum_order_quantity} = tool;
@@ -16,4 +16,4 @@ const ToolRow = ({tool,index,refetch,setDeletingTool}) => {
     );
 };
 
-export default ToolRow;
+export default ToolRow; */
