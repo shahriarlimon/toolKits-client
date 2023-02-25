@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS } from "../actionTypes/userActionTypes";
+import { ALL_USERS_FAIL, ALL_USERS_REQUEST, ALL_USERS_SUCCESS, CLEAR_ERROR, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS } from "../actionTypes/userActionTypes";
 
 /* REGISTER */
 export const registerUser = (userData) => async (dispatch) => {
@@ -62,4 +62,26 @@ export const loadUser = () => async (dispatch) => {
         })
     }
 
+}
+
+
+export const getAllUsers = () => async (dispatch) => {
+    try {
+        dispatch({ type: ALL_USERS_REQUEST });
+        let link = `http://localhost:5000/api/v1/user/admin/users`;
+        const { data } = await axios.get(link, {
+            withCredentials: true
+        })
+        dispatch({ type: ALL_USERS_SUCCESS, payload: data.users })
+    } catch (error) {
+        dispatch({
+            type: ALL_USERS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+
+}
+
+export const clearErrors = () => async (dispatch) => {
+    dispatch({ type: CLEAR_ERROR })
 }

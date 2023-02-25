@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_REQUEST, MY_ORDER_FAIL, MY_ORDER_SUCCESS } from "../actionTypes/orderActionTypes";
+import { ALL_ORDERS_FAIL, ALL_ORDERS_REQUEST, ALL_ORDERS_SUCCESS, CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_REQUEST, MY_ORDER_FAIL, MY_ORDER_SUCCESS } from "../actionTypes/orderActionTypes";
 
 export const createOrder = (order) => async (dispatch) => {
     try {
@@ -47,6 +47,32 @@ export const myOrders = () => async (dispatch) => {
     }
 
 }
+
+/* all orders for admin */
+
+export const getAllOrders = () => async (dispatch) => {
+    try {
+        dispatch({ type: ALL_ORDERS_REQUEST });
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true
+        }
+        let link = `http://localhost:5000/api/v1/order/admin/orders`;
+
+        const { data } = await axios.get(link, config)
+        dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders })
+
+    } catch (error) {
+        dispatch({
+            type: ALL_ORDERS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+
+}
+
 
 
 export const clearErrors = () => async (dispatch) => {

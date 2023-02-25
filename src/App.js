@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import './App.css';
 import Dashboard from "./Components/Pages/Dashboard/Dashboard";
-import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin";
 import ManageProduct from "./Components/Pages/Dashboard/ManageProduct";
 import Payment from "./Components/Pages/Dashboard/MyOrders/Payment";
 import MyProfile from "./Components/Pages/Dashboard/MyProfile";
@@ -12,10 +11,8 @@ import RequireAuth from "./Components/Pages/Login/RequireAuth/RequireAuth";
 import Signup from "./Components/Pages/Login/Signup";
 import Footer from "./Components/Shared/Footer/Footer";
 import Navbar from "./Components/Shared/Navbar/Navbar";
-import { ToastContainer, toast } from 'react-toastify';
-
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AddProduct from "./Components/Pages/Dashboard/AddProduct";
 import NotFound from "./Components/NotFound/NotFound";
 import MyPortfoliyo from "./Components/Pages/MyPortfoliyo/MyPortfoliyo";
 import Blogs from "./Components/Pages/Blogs/Blogs";
@@ -42,6 +39,9 @@ import UserProfile from "./Components/Pages/User/UserProfile";
 import AddReview from "./Components/Pages/User/AddReview";
 import AdminDashboard from "./Components/Pages/Admin/AdminDashboard";
 import ManageAllOrders from "./Components/Pages/Admin/ManageAllOrders";
+import MakeAdmin from "./Components/Pages/Admin/MakeAdmin";
+import ManageProducts from "./Components/Pages/Admin/ManageProducts";
+import AddProduct from "./Components/Pages/Admin/AddProduct";
 
 function App() {
   const { user, isAuthenticated } = useSelector((state) => state.user)
@@ -85,7 +85,9 @@ function App() {
             <Route path="/admin/dashboard" element={<AdminDashboard />}>
               <Route path="my-profile" element={< UserProfile />} />
               <Route path="manage-all-orders" element={<ManageAllOrders />} />
-              <Route path="add-review" element={<AddReview />} />
+              <Route path="make-admin" element={<MakeAdmin />} />
+              <Route path="manage-product" element={<ManageProducts />} />
+              <Route path="add-product" element={<AddProduct />} />
             </Route>
 
           </Route>
